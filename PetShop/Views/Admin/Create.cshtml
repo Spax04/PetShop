@@ -1,0 +1,43 @@
+﻿@model PetShop.Model.Animal
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Add new animal</h1>
+<div>
+    <form asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly"></div>
+    
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" />
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Age"></label>
+            <input asp-for="Age" />
+            <span asp-validation-for="Age"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="PictureName"></label>
+            <input asp-for="PictureName" />
+            <span asp-validation-for="PictureName"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Discription"></label>
+            <input asp-for="Discription" />
+            <span asp-validation-for="Discription"></span>
+        </div>
+            <div class="form-group">
+                <label asp-for="CategoryId"></label>
+                <input asp-for="CategoryId" />
+
+            </div>
+        <div class="form-group">
+            <input type="submit" value="Create" />
+            <a class="btn" asp-action="Index">Back</a>
+        </div>
+    </form>
+</div>
+

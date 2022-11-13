@@ -1,0 +1,25 @@
+﻿@model PetShop.Model.Animal
+@{
+    ViewBag.Title = "Pet Store - Cataloge";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<select asp-for="Category" asp-items="new SelectList(ViewBag.Categories)">
+
+</select>
+<div class="catalogeBlock">
+    @foreach (var a in ViewBag.AllAnimals)
+    {
+    
+        <div class="petBlock cataloge">
+            <div class="imgBlock" style="background-image: url(@a.PictureName) "></div>
+            <div class="petDit catalogeDit">
+                <h3 class="petDit-content">@a.Name</h3>
+                <a class="btn petDit-content" asp-controller="Cataloge" asp-action="ShowDetail" asp-route-name="@a.Name">Detail</a>
+            </div>
+
+        </div>
+   
+    }
+</div>
+

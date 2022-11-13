@@ -1,0 +1,32 @@
+﻿@model PetShop.Model.Animal
+@{
+    ViewBag.Title = "Pet Store - Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Top two animals</h1>
+@foreach (var a in ViewBag.TopAnimnals)
+{
+
+    <div class="petBlock">
+        <div class="imgBlock" style="background-image: url(@a.PictureName) "></div>
+        <div class="petDit">
+
+            <h3>@a.Name</h3>
+            <label asp-for="Comments"></label>
+            <span>@a.Comments.Count</span>
+            <br>
+
+            <label asp-for="Age"></label>
+            <span>@a.Age</span> 
+            <br>
+            
+            <label asp-for="Discription"></label>
+            <p>@a.Discription</p>
+
+        </div>
+
+    </div>
+
+}
+

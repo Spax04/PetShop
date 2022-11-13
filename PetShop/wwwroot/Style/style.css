@@ -1,0 +1,184 @@
+﻿/* Starter Page */
+body {
+    font-family: 'Rubik', sans-serif;
+    font-size: 1rem;
+    line-height: 1.6rem;
+    margin: 0;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+p {
+    margin: 0 0 0 10px;
+}
+
+.page {
+    width: 100%;
+    min-height: 100vh;
+    max-height: 1000vh;
+    background: #FEE3A2;
+    background-size: cover;
+
+    position: relative;
+    
+}
+
+.container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/*==== HEADER ====*/
+
+header {
+    background-color: #058240;
+    height: 6rem;
+    
+   
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.headerInner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logo {
+    max-height: 80px;
+}
+
+.logoDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .logoDiv > h1 {
+        font-size: 2rem;
+    }
+
+.navLink {
+    text-decoration: none;
+    background-color: #058240;
+    border: 2px solid #F3C301;
+    color: #F3C301;
+    padding: 1rem;
+    font-size: 1.5rem;
+    border-radius: 15px;
+    transition: background .2s linear;
+}
+
+    .navLink:hover {
+        background-color: #F3C301;
+        border: 2px solid #000;
+        color: #000;
+    }
+
+footer {
+    background-color: #058240;
+    height: 6rem;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+
+}
+
+.footerInner {
+    display: flex;
+    padding-top: 15px;
+    justify-content: center;
+}
+
+.content{
+    padding-top: 3rem;
+}
+
+.imgBlock {
+    width: 250px;
+    height: 150px;
+    background-color: black;
+    background-size: cover;
+    border-radius: 25px;
+    border: 0.3rem solid #ADCACB;
+}
+
+.petBlock {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    display: flex;
+    justify-content: space-around;
+}
+.petBlock.cataloge {
+        width: 33.3333%;
+}
+
+.catalogeBlock{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.petDit{
+    width: 500px;
+}
+
+.petDit.catalogeDit {
+        width: 200px;
+}
+
+.btn {
+    text-decoration: none;
+    background-color: #ADCACB;
+    border: 2px solid #000;
+    color: #000;
+    padding: 10px;
+    border-radius: 10px;
+    transition: background .2s linear;
+}
+
+    .btn:hover {
+        background-color: #F3C301;
+        border: 2px solid #000;
+        color: #000;
+    }
+
+.adminBtns{
+    margin-top: 25px;
+
+}
+
+.petDit-content{
+    margin-bottom: 15px;
+    margin-left: 10px;
+}
+
+.petComments {
+    
+    border: 2px solid #000;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.commentP {
+    padding: 15px;
+    margin: 15px;
+    border-radius: 10px;
+    background-color: #ADCACB;
+}
+
+.bar{
+    display:flex;
+}
+label{
+    font-weight:600;
+}

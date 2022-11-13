@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="stylesheet" href="~/Style/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="page">
+        <header>
+            <div class="container">
+                <div class="headerInner">
+                    <div class="logoDiv">
+                        <img id="logo" src="~/Image/mainLogo.png">
+                        <h1>Pet Store</h1>
+                    </div>
+
+                    <div class="navigation">
+                        <a class="navLink" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="navLink" asp-controller="Cataloge" asp-action="Index">Cataloge</a>
+                        <a class="navLink" asp-controller="Admin" asp-action="Index">Admin panel</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="content">
+            <div class="container">
+                @RenderBody()
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footerInner">
+                <h2>Created by Alexander Gotlib</h2>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
