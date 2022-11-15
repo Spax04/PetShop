@@ -1,4 +1,4 @@
-﻿@model PetShop.Model.Animal
+﻿@model PetShop.Model.Comments
 @{
     ViewBag.Title = "ShowDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -12,11 +12,15 @@
 
         <h3>@ViewBag.Animal.Name</h3>
 
-        <label asp-for="Age"></label>
+        <label>Age: </label>
         <span>@ViewBag.Animal.Age</span>
         <br>
 
-        <label asp-for="Discription"></label>
+        <label>Category Name: </label>
+        <span>@ViewBag.Category.Name</span>
+        <br>
+
+        <label>Discription: </label>
         <p>@ViewBag.Animal.Discription</p>
 
     </div>
@@ -33,6 +37,11 @@
 </div>
 
 <div>
+@*    <form asp-action="AddComment" method="post">
+        <input asp-for="Comment"/>
+
+        <input type="submit" value="AddComment"/>
+    </form>*@
     
 </div>
 

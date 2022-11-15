@@ -11,8 +11,9 @@ namespace PetShop.Model
         public int? AnimalId { get; set; }
 
         [ForeignKey("AnimalId")]
-        public Animal? Animal { get; set; }
+        public virtual Animal? Animal { get; set; }
 
+        [DataType(DataType.MultilineText)]
         public string? Comment { get; set; }
     }
 }

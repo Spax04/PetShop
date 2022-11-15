@@ -9,7 +9,7 @@ namespace PetShop.Model
 
         public string? Name { get; set; }
 
-        public ICollection<Animal>? Animals { get; set; }
+        public virtual ICollection<Animal>? Animals { get; set; }
 
 
         public override string ToString()

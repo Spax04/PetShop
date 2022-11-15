@@ -13,7 +13,15 @@ namespace PetShop.Repositories
         IEnumerable<Animal> GetAllAnimals();
         IEnumerable<Category> GetCategories();
         IEnumerable<Comments> GetCommentsByAnimal(Animal t);
+        IEnumerable<Animal> GetAnimalsByCategory(Category category);
+
         Animal GetAnimalByName(string name);
         void AddComment(Comments newComment);
+        void RemoveComment(Comments comment);
+        Animal GetAnimalById(int id);
+
+        Category GetCategoryByAnimal(Animal animal);
+
+
     }
 }

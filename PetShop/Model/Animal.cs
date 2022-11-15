@@ -16,24 +16,24 @@ namespace PetShop.Model
 
         [DisplayName("Age: ")]
         [Required(ErrorMessage = "Age is required")]
-
         public int? Age { get; set; }
 
+        [DisplayName("Image URL: ")]
         [Required(ErrorMessage = "Picture URL is required")]
         public string? PictureName { get; set; }
 
         [DisplayName("Discription: ")]
         [Required(ErrorMessage = "Discription is required")]
-
+        [DataType(DataType.MultilineText)]
         public string? Discription { get; set; }
 
         //Relationship
         [Required(ErrorMessage = "Category is required")]
         public int? CategoryId { get; set; }
         [ForeignKey("CategoryId")]
-        public Category? Category { get; set; }
+        public virtual Category? Category { get; set; }
 
         [DisplayName("Count of comments: ")]
-        public ICollection<Comments>? Comments { get; set; }
+        public virtual ICollection<Comments>? Comments { get; set; }
     }
 }

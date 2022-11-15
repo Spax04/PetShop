@@ -1,14 +1,14 @@
 ﻿@model PetShop.Model.Animal
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edite";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Add new animal</h1>
+<h1>Update animal</h1>
 <div>
-    <form asp-action="Create" method="post">
-            <div asp-validation-summary="ModelOnly"></div>
-    
+    <form asp-action="Edit" method="post">
+        <div asp-validation-summary="ModelOnly"></div>
+
         <div class="form-group">
             <label asp-for="Name"></label>
             <input asp-for="Name" />
@@ -29,21 +29,20 @@
             <input asp-for="Discription" />
             <span asp-validation-for="Discription"></span>
         </div>
-            <div class="form-group">
-                <label asp-for="Category"></label>
+        <div class="form-group">
+            <label asp-for="Category"></label>
             <select asp-for="CategoryId">
                 @{
                     foreach (var a in ViewBag.Categories)
                     {
-                        <option name="CategoryId" value="@a.Id" >@a.Name</option>
+                        <option value="@a.Id">@a.Name</option>
                     }
                 }
             </select>
-            </div>
+        </div>
         <div class="form-group">
-            <input class="btn" type="submit" value="Create" />
+            <input class="btn" type="submit" value="Update" />
             <a class="btn" asp-action="Index">Back</a>
         </div>
     </form>
 </div>
-

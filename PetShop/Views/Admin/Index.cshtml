@@ -4,12 +4,9 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="bar">
-    <select name="categories">
-        @foreach (var i in ViewBag.Categories)
-        {
-            <option>@i.Name</option>
-        }
-    </select>
+@*    <label asp-for="CategoryId"></label>
+    <select asp-for="CategoryId" >
+    </select>*@
 
     <a class="btn" asp-action="Create">Add Animal</a>
 </div>
@@ -32,8 +29,8 @@
             <p>@a.Discription</p>
 
             <div class="adminBtns">
-                <a class="btn" href="#">Edit</a>
-                <a class="btn" href="#">Delete</a>
+                <a class="btn" asp-action="Edit" asp-route-id="@a.Id">Edit</a>
+                <a class="btn" asp-action="Delete" asp-route-name="@a.Name">Delete</a>
             </div>
 
         </div>

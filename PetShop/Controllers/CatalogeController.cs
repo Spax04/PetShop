@@ -15,24 +15,36 @@ namespace PetShop.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.AllAnimals = _repository.GetAllAnimals();
+             
             ViewBag.Categories = _repository.GetCategories();
-            return View();
+            return View(_repository.GetAllAnimals());
+        }
+        public IActionResult Filter(Category category)
+        {
+            return View("Index", _repository.GetAnimalsByCategory(category));
         }
 
         public IActionResult ShowDetail(string name)
         {
             Animal animal = _repository.GetAnimalByName(name);
             ViewBag.Animal = animal;
+            ViewBag.Category = _repository.GetCategoryByAnimal(animal);
             ViewBag.Comments = _repository.GetCommentsByAnimal(animal);
             return View();
         }
 
+
+
+
         public IActionResult AddComment(string text, Animal animal)
         {
-            Comments newComment = new Comments() { AnimalId = animal.Id, Comment = text };
-            _repository.AddComment(newComment);
-            return View("ShowDetail");
+            if (ModelState.IsValid)
+            {
+                Comments newComment = new Comments() { AnimalId = animal.Id, Comment = text };
+                _repository.AddComment(newComment);
+                return View("Index");
+            }
+            return View("Index");
         }
     }
 }

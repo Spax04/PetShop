@@ -1,14 +1,21 @@
-﻿@model PetShop.Model.Animal
+﻿@model IEnumerable<PetShop.Model.Animal>
 @{
     ViewBag.Title = "Pet Store - Cataloge";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<select asp-for="Category" asp-items="new SelectList(ViewBag.Categories)">
+<select >
+    @foreach (var a in ViewBag.Categories)
+    {
+        <option>
+            <a asp-action="Filter" asp-route-name="@a">@a.Name</a>
+        </option>
 
+    }
 </select>
+
 <div class="catalogeBlock">
-    @foreach (var a in ViewBag.AllAnimals)
+    @foreach (var a in Model)
     {
     
         <div class="petBlock cataloge">
