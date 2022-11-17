@@ -163,10 +163,10 @@ footer {
 }
 
 .petComments {
-    
     border: 2px solid #000;
     border-radius: 10px;
-    padding: 15px;
+    margin-top: 15px;
+    margin-bottom: 35px;
 }
 
 .commentP {
@@ -178,7 +178,29 @@ footer {
 
 .bar{
     display:flex;
+    justify-content:space-between;
 }
 label{
     font-weight:600;
+}
+
+.combobox {
+    height: 55px;
+    border-radius: 10px;
+}
+
+.Input {
+    width: 550px;
+    height: 45px;
+    font-size: 30px;
+    border-radius:10px;
+}
+
+.form-group{
+    margin-bottom: 15px;
+}
+
+.Input.discription{
+    height: 150px;
+    font-size: 1rem;
 }

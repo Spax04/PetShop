@@ -14,14 +14,20 @@ namespace PetShop.Controllers
         }
 
         public IActionResult Index()
-        {
-             
+        {   
             ViewBag.Categories = _repository.GetCategories();
             return View(_repository.GetAllAnimals());
         }
-        public IActionResult Filter(Category category)
+
+        public IActionResult Filter(int id)
         {
-            return View("Index", _repository.GetAnimalsByCategory(category));
+            if(id == 0)
+            {
+                ViewBag.Categories = _repository.GetCategories();
+                return View("Index", _repository.GetAllAnimals());
+            }
+            ViewBag.Categories = _repository.GetCategories();
+            return View("Index", _repository.GetAnimalsByCategoryId(id));
         }
 
         public IActionResult ShowDetail(string name)
@@ -33,18 +39,18 @@ namespace PetShop.Controllers
             return View();
         }
 
-
-
-
-        public IActionResult AddComment(string text, Animal animal)
+        public IActionResult AddComment( string newComment, int animalId, string name)
         {
             if (ModelState.IsValid)
             {
-                Comments newComment = new Comments() { AnimalId = animal.Id, Comment = text };
-                _repository.AddComment(newComment);
-                return View("Index");
+                _repository.AddComment(new Comments { AnimalId = animalId, Comment = newComment});
+/*                Animal animal = _repository.GetAnimalByName(name);
+                ViewBag.Animal = animal;
+                ViewBag.Category = _repository.GetCategoryByAnimal(animal);
+                ViewBag.Comments = _repository.GetCommentsByAnimal(animal);*/
+                return RedirectToAction("Index");
             }
-            return View("Index");
+            return RedirectToAction("Index");
         }
     }
 }

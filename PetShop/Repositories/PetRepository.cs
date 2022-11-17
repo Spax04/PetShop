@@ -68,9 +68,9 @@ namespace PetShop.Repositories
             _context.SaveChanges();
         }
 
-        public IEnumerable<Animal> GetAnimalsByCategory(Category category)
+        public IEnumerable<Animal> GetAnimalsByCategoryId(int id)
         {
-            return _context.Animals!.Where(c => c.CategoryId == category.Id);
+            return _context.Animals!.Where(c => c.CategoryId == id);
         }
 
         public Category GetCategoryByAnimal(Animal animal)

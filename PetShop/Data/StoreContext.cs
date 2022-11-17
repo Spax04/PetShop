@@ -47,17 +47,17 @@ namespace PetShop.Data
                     Id = 3,
                     Name = "Turtle",
                     Age = 6,
-                    PictureName = "https://cdn.britannica.com/55/174255-050-526314B6/brown-Guernsey-cow.jpg",
+                    PictureName = "https://cdn.britannica.com/66/195966-138-F9E7A828/facts-turtles.jpg?w=800&h=450&c=crop",
                     Discription = "Turtles are an order of reptiles known as Testudines, characterized by a shell developed mainly from their ribs. Modern turtles are divided into two major groups, the Pleurodira (side necked turtles) and Cryptodira (hidden necked turtles), which differ in the way the head retracts. There are 360 living and recently extinct species of turtles, including land-dwelling tortoises and freshwater terrapins. They are found on most continents, some islands and, in the case of sea turtles, much of the ocean. Like other reptiles, birds, and mammals, they breathe air and do not lay eggs underwater, although many species live in or around water. ",
                     CategoryId = 2
                 },
                 new
                 {
                     Id = 4,
-                    Name = "Axolotl",
+                    Name = "Chameleon",
                     Age = 7,
-                    PictureName = "https://cdn.britannica.com/66/195966-138-F9E7A828/facts-turtles.jpg?w=800&h=450&c=crop",
-                    Discription = "The axolotl Classical Nahuatl: Ambystoma mexicanum, is a paedomorphic salamander closely related to the tiger salamander. Axolotls are unusual among amphibians in that they reach adulthood without undergoing metamorphosis. Instead of taking to the land, adults remain aquatic and gilled. The species was originally found in several lakes underlying what is now Mexico City, such as Lake Xochimilco and Lake Chalco. These lakes were drained by Spanish settlers after the conquest of the Aztec Empire, leading to the destruction of much of the axolotl’s natural habitat.",
+                    PictureName = "https://www.worldatlas.com/r/w768/upload/71/8d/39/shutterstock-779977204.jpg",
+                    Discription = "Chameleons or chamaeleons (family Chamaeleonidae) are a distinctive and highly specialized clade of Old World lizards with 202 species described as of June 2015.[1] The members of this family are best known for their distinct range of colors, being capable of shifting to different hues and degrees of brightness. The large number of species in the family exhibit considerable variability in their capacity to change color. For some, it is more of a shift of brightness (shades of brown); for others, a plethora of color-combinations (reds, yellows, greens, blues) can be seen. ",
                     CategoryId = 2
                 },
                 new
@@ -96,23 +96,41 @@ namespace PetShop.Data
                     Discription = "A cockatoo is any of the 21 parrot species belonging to the family Cacatuidae, the only family in the superfamily Cacatuoidea. Along with the Psittacoidea (true parrots) and the Strigopoidea (large New Zealand parrots), they make up the order Psittaciformes. The family has a mainly Australasian distribution, ranging from the Philippines and the eastern Indonesian islands of Wallacea to New Guinea, the Solomon Islands and Australia. ",
                     CategoryId = 4
                 },
+                      new
+                      {
+                          Id = 9,
+                          Name = "Frog",
+                          Age = 1,
+                          PictureName = "https://res.cloudinary.com/uktv/image/upload/v1372350283/oglswajafw736r2dtacp.jpg",
+                          Discription = "A frog is any member of a diverse and largely carnivorous group of short-bodied, tailless amphibians composing the order Anura (ανοὐρά, literally without tail in Ancient Greek). The oldest fossil Triadobatrachus is known from the Early Triassic of Madagascar, but molecular clock dating suggests their split from other amphibians may extend further back to the Permian, 265 million years ago. Frogs are widely distributed, ranging from the tropics to subarctic regions, but the greatest concentration of species diversity is in tropical rainforest. Frogs account for around 88% of extant amphibian species. They are also one of the five most diverse vertebrate orders. Warty frog species tend to be called toads, but the distinction between frogs and toads is informal, not from taxonomy or evolutionary history. ",
+                          CategoryId = 5
+                      },
                    new
                    {
-                Id = 9,
+                       Id = 10,
+                       Name = "Axolotl",
+                       Age = 2,
+                       PictureName = "https://static.wixstatic.com/media/108ff4_f4a84ce6daad4f11b8deba7a3e7377b5~mv2.jpg/v1/fit/w_995%2Ch_596%2Cal_c%2Cq_80/file.jpg",
+                       Discription = "The axolotl Classical Nahuatl: Ambystoma mexicanum, is a paedomorphic salamander closely related to the tiger salamander. Axolotls are unusual among amphibians in that they reach adulthood without undergoing metamorphosis. Instead of taking to the land, adults remain aquatic and gilled. The species was originally found in several lakes underlying what is now Mexico City, such as Lake Xochimilco and Lake Chalco. These lakes were drained by Spanish settlers after the conquest of the Aztec Empire, leading to the destruction of much of the axolotl’s natural habitat.",
+                       CategoryId = 5
+                   },
+                   new
+                   {
+                Id = 11,
                     Name = "Bee",
                     Age = 1,
                     PictureName = "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Anthidium_February_2008-1.jpg/1280px-Anthidium_February_2008-1.jpg",
                     Discription = "Bees are winged insects closely related to wasps and ants, known for their roles in pollination and, in the case of the best-known bee species, the western honey bee, for producing honey. Bees are a monophyletic lineage within the superfamily Apoidea. They are presently considered a clade, called Anthophila. There are over 16,000 known species of bees in seven recognized biological families. Some species – including honey bees, bumblebees, and stingless bees – live socially in colonies while most species (>90%) – including mason bees, carpenter bees, leafcutter bees, and sweat bees – are solitary. ",
-                    CategoryId = 5
+                    CategoryId = 6
                 },
                    new
                    {
-                Id = 10,
+                Id = 12,
                     Name = "Mantis",
                     Age = 2,
                     PictureName = "https://inaturalist-open-data.s3.amazonaws.com/photos/180063407/original.jpg",
                     Discription = "Mantises are an order of insects that contains over 2,400 species in about 460 genera in 33 families. The largest family is the Mantidae. Mantises are distributed worldwide in temperate and tropical habitats. They have triangular heads with bulging eyes supported on flexible necks.",
-                    CategoryId = 5
+                    CategoryId = 6
                 }
             );
 

@@ -11,11 +11,12 @@ namespace PetShop.Model
 
         [DisplayName("Name: ")]
         [Required(ErrorMessage ="Animal name is required")]
-       
+        [StringLength(45)]
         public string? Name { get; set; }
 
         [DisplayName("Age: ")]
         [Required(ErrorMessage = "Age is required")]
+        [Range(0,200)]
         public int? Age { get; set; }
 
         [DisplayName("Image URL: ")]
@@ -25,6 +26,7 @@ namespace PetShop.Model
         [DisplayName("Discription: ")]
         [Required(ErrorMessage = "Discription is required")]
         [DataType(DataType.MultilineText)]
+        [StringLength(1000, ErrorMessage = "Discription length must be between 10 and 1000 chars.", MinimumLength = 10)]
         public string? Discription { get; set; }
 
         //Relationship

@@ -1,18 +1,26 @@
-﻿@model PetShop.Model.Animal
+﻿@model IEnumerable<PetShop.Model.Animal>
 @{
     ViewBag.Title = "Pet Store - Admin Panel";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="bar">
-@*    <label asp-for="CategoryId"></label>
-    <select asp-for="CategoryId" >
-    </select>*@
+    <select class="combobox">
+        <option value="" selected disabled hidden>Choose category</option>
+        <option value="0">All</option>
+
+        @foreach (var a in ViewBag.Categories)
+        {
+
+            <option value="@a.Id">@a.Name </option>
+
+        }
+    </select>
 
     <a class="btn" asp-action="Create">Add Animal</a>
 </div>
 
 
-@foreach (var a in ViewBag.Animals)
+@foreach (var a in Model)
 {
 
     <div class="petBlock">
@@ -21,11 +29,11 @@
 
             <h3>@a.Name</h3>
 
-            <label asp-for="Age"></label>
+            <label asp-for="@a.Age"></label>
             <span>@a.Age</span>
             <br>
 
-            <label asp-for="Discription"></label>
+            <label asp-for="@a.Discription"></label>
             <p>@a.Discription</p>
 
             <div class="adminBtns">
@@ -38,3 +46,12 @@
     </div>
 
 }
+
+<script>
+    $(function () {
+        $("select").on("input", function () {
+            let selectedValue = $("select").val();
+            window.location.href = "/Admin/Filter/" + selectedValue;
+        });
+    });
+</script>

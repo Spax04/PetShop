@@ -14,12 +14,22 @@ namespace PetShop.Controllers
         {
             this._repository = repository;
         }
-
+         
         public IActionResult Index()
         {
-            ViewBag.Animals = _repository.GetAllAnimals();
             ViewBag.Categories = _repository.GetCategories();
-            return View();
+            return View(_repository.GetAllAnimals());
+        }
+
+        public IActionResult Filter(int id)
+        {
+            if (id == 0)
+            {
+                ViewBag.Categories = _repository.GetCategories();
+                return View("Index", _repository.GetAllAnimals());
+            }
+            ViewBag.Categories = _repository.GetCategories();
+            return View("Index", _repository.GetAnimalsByCategoryId(id));
         }
 
         [HttpGet]

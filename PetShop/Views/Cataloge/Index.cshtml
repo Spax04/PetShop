@@ -4,12 +4,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<select >
+<select class="combobox">
+    <option value="" selected disabled hidden>Choose category</option>
+    <option value="0">All</option>
+
     @foreach (var a in ViewBag.Categories)
     {
-        <option>
-            <a asp-action="Filter" asp-route-name="@a">@a.Name</a>
-        </option>
+        
+        <option value="@a.Id" >@a.Name </option>
 
     }
 </select>
@@ -29,4 +31,13 @@
    
     }
 </div>
+
+<script>
+    $(function(){
+        $("select").on("input", function(){
+            let selectedValue = $("select").val();
+            window.location.href = "/Cataloge/Filter/" + selectedValue;
+        });
+    });
+</script>
 
