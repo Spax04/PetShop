@@ -27,11 +27,12 @@ namespace PetShop.Repositories
             
         }
 
-        public void RemoveComment(Comments comment)
+        public void RemoveComment(int id)
         {
-            Comments removableComment = _context.Comments!.First(c => c == comment);
+            Comments removableComment = _context.Comments!.First(c => c.Id == id);
 
             _context.Comments!.Remove(removableComment);
+            _context.SaveChanges();
         }
 
         public void AddComment(Comments newComment)

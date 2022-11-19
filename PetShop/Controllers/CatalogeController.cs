@@ -44,12 +44,14 @@ namespace PetShop.Controllers
             if (ModelState.IsValid)
             {
                 _repository.AddComment(new Comments { AnimalId = animalId, Comment = newComment});
-/*                Animal animal = _repository.GetAnimalByName(name);
-                ViewBag.Animal = animal;
-                ViewBag.Category = _repository.GetCategoryByAnimal(animal);
-                ViewBag.Comments = _repository.GetCommentsByAnimal(animal);*/
                 return RedirectToAction("Index");
             }
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult RemoveComment(int id)
+        {
+            _repository.RemoveComment(id);
             return RedirectToAction("Index");
         }
     }

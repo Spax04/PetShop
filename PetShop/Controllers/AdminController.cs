@@ -81,7 +81,7 @@ namespace PetShop.Controllers
 
             foreach (Comments comment in aComments)
             {
-                _repository.RemoveComment(comment);
+                _repository.RemoveComment(comment.Id);
             }
 
             _repository.Delete(animal.Id);

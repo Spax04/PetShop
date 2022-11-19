@@ -12,9 +12,6 @@ namespace PetShop.Model
         public virtual ICollection<Animal>? Animals { get; set; }
 
 
-        public override string ToString()
-        {
-            return Name;
-        }
+       
     }
 }

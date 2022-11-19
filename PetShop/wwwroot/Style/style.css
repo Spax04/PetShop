@@ -204,3 +204,7 @@ label{
     height: 150px;
     font-size: 1rem;
 }
+.commentBlock{
+    display: flex;
+    justify-content: space-between;
+}

@@ -32,7 +32,12 @@
     
     @foreach (var c in ViewBag.Comments)
     {
-        <p class="commentP">@c.Comment</p>
+        <div class="commentBlock">
+            <a class="btn" asp-action="RemoveComment" asp-route-id="@c.Id">X</a>
+            <p class="commentP">@c.Comment</p>
+        </div>
+        
+        
     }
 </div>
 

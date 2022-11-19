@@ -17,7 +17,7 @@ namespace PetShop.Repositories
 
         Animal GetAnimalByName(string name);
         void AddComment(Comments newComment);
-        void RemoveComment(Comments comment);
+        void RemoveComment(int id);
         Animal GetAnimalById(int id);
 
         Category GetCategoryByAnimal(Animal animal);
