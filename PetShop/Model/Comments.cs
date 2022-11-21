@@ -14,6 +14,8 @@ namespace PetShop.Model
         public virtual Animal? Animal { get; set; }
 
         [DataType(DataType.MultilineText)]
+        [Required (ErrorMessage ="Comment cannot be empty")]
+        [StringLength(1000, ErrorMessage =("Comment shold be between 3 and 1000 chars"), MinimumLength = 3)]
         public string? Comment { get; set; }
     }
 }

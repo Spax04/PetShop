@@ -44,9 +44,13 @@ namespace PetShop.Controllers
             if (ModelState.IsValid)
             {
                 _repository.AddComment(new Comments { AnimalId = animalId, Comment = newComment});
-                return RedirectToAction("Index");
+                return Redirect(url: $"/Cataloge/ShowDetail?name={name}");
             }
-            return RedirectToAction("Index");
+            Animal animal = _repository.GetAnimalByName(name);
+            ViewBag.Animal = animal;
+            ViewBag.Category = _repository.GetCategoryByAnimal(animal);
+            ViewBag.Comments = _repository.GetCommentsByAnimal(animal);
+            return View("ShowDetail");
         }
 
         public IActionResult RemoveComment(int id)

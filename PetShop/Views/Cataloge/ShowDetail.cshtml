@@ -48,6 +48,7 @@
         <input class="Input" type="hidden" name="animalId" value="@ViewBag.Animal.Id" />
         <input class="Input" type="hidden" name="name" value="@ViewBag.Animal.Name" />
         <input class="btn" type="submit" value="AddComment"/>
+        <span asp-validation-for="Comment"></span>
     </form>
     
 </div>
