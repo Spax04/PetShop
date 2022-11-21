@@ -11,7 +11,9 @@ namespace PetShop.Model
 
         [DisplayName("Name: ")]
         [Required(ErrorMessage ="Animal name is required")]
-        [StringLength(45)]
+        
+        [RegularExpression(@"^[a-zA-Z''-'\s]{1,40}$",
+         ErrorMessage = "Characters are not allowed.")]
         public string? Name { get; set; }
 
         [DisplayName("Age: ")]
