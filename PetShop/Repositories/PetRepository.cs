@@ -52,12 +52,12 @@ namespace PetShop.Repositories
         {
             var animalInDb = _context.Animals!.Single(a => a.Id == id);
 
+            animalInDb.Name = animal.Name;
             animalInDb.Age = animal.Age;
-            animalInDb.Category = animal.Category;
             animalInDb.PictureName = animal.PictureName;
             animalInDb.Discription = animal.Discription;
             animalInDb.CategoryId = animal.CategoryId;
-            animalInDb.Category = animal.Category;
+            
 
             _context.SaveChanges();
         }

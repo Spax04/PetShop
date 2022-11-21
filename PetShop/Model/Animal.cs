@@ -16,7 +16,7 @@ namespace PetShop.Model
 
         [DisplayName("Age: ")]
         [Required(ErrorMessage = "Age is required")]
-        [Range(0,200)]
+        [Range(1,200)]
         public int? Age { get; set; }
 
         [DisplayName("Image URL: ")]

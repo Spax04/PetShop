@@ -211,5 +211,9 @@ label{
 }
 
 .btn.btnRemoveComment{
-    height: 10px;
+    height: 35px;
+}
+
+.formBlock{
+    padding-bottom: 3rem;
 }

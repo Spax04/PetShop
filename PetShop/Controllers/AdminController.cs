@@ -48,8 +48,8 @@ namespace PetShop.Controllers
                 _repository.Insert(animal);
                 return RedirectToAction("Index");
             }
-
-            return RedirectToAction("Index");
+            ViewBag.Categories = _repository.GetCategories();
+            return View();
         }
 
         [HttpGet]
@@ -71,7 +71,8 @@ namespace PetShop.Controllers
                 return RedirectToAction("Index");
             }
 
-            return RedirectToAction("Index");
+            ViewBag.Categories = _repository.GetCategories();
+            return View(animal);
         }
 
         public IActionResult Delete(string name)
