@@ -1,10 +1,8 @@
-
-
 using Microsoft.EntityFrameworkCore;
 using PetShop.Data;
 using PetShop.Repositories;
 
- var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddTransient<IRepository, PetRepository>();
 string connectionString = builder.Configuration["ConnectionString:DefaultConnection"];
 builder.Services.AddDbContext<StoreContext>(options => options.UseLazyLoadingProxies().UseSqlServer(connectionString));
@@ -28,8 +26,6 @@ app.UseEndpoints(endpoints =>
     endpoints.MapDefaultControllerRoute();
 
 });
-
-
 
 
 
