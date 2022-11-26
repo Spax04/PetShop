@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PetShop.Data;
 using PetShop.Repositories;
@@ -6,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddTransient<IRepository, PetRepository>();
 string connectionString = builder.Configuration["ConnectionString:DefaultConnection"];
 builder.Services.AddDbContext<StoreContext>(options => options.UseLazyLoadingProxies().UseSqlServer(connectionString));
+builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<StoreContext>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -17,6 +19,7 @@ using (var scope = app.Services.CreateScope())
     ctx.Database.EnsureCreated();
 }
 
+app.UseAuthentication();
 app.UseStaticFiles();
 app.UseRouting();
 

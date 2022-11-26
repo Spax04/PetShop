@@ -26,7 +26,13 @@
                     <div class="navigation">
                         <a class="navLink" asp-controller="Home" asp-action="Index">Home</a>
                         <a class="navLink" asp-controller="Cataloge" asp-action="Index">Cataloge</a>
-                        <a class="navLink" asp-controller="Admin" asp-action="Index">Admin panel</a>
+                        @if (User.Identity!.IsAuthenticated){
+                            <a class="navLink" asp-controller="Admin" asp-action="Index">Admin panel</a>
+                            <a class="navLink" asp-controller="Account" asp-action="Logout">LogOut</a>
+                        }else{
+                            <a class="navLink" asp-controller="Account" asp-action="Login">LogIn</a>
+                        }
+                        
                     </div>
                 </div>
             </div>

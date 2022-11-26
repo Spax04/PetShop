@@ -22,6 +22,8 @@ namespace PetShop.Repositories
 
         Category GetCategoryByAnimal(Animal animal);
 
+         void AddNewUser(Login newUser);
+
 
     }
 }
