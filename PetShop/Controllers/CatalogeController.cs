@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PetShop.Model;
 using PetShop.Repositories;
 
 namespace PetShop.Controllers
 {
+    [Authorize]
     public class CatalogeController : Controller
     {
         private IRepository _repository;

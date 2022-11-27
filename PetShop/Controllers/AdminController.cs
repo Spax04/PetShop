@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using PetShop.Model;
 using PetShop.Repositories;
@@ -6,6 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace PetShop.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class AdminController : Controller
     {
         private IRepository _repository;
@@ -14,7 +16,8 @@ namespace PetShop.Controllers
         {
             this._repository = repository;
         }
-         
+
+        
         public IActionResult Index()
         {
             ViewBag.Categories = _repository.GetCategories();

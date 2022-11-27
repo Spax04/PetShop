@@ -9,5 +9,8 @@ namespace PetShop.Model
 
         [Required]
         public string? Password { get; set; }
+
+        [Required]
+        public bool isAdmin { get; set; }
     }
 }

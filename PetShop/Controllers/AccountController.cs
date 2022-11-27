@@ -10,12 +10,22 @@ namespace PetShop.Controllers
         IRepository _repository;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IdentityRole adminRole;
 
-        public AccountController(IRepository repository, UserManager<IdentityUser> userManager,SignInManager<IdentityUser> signInManager)
+        public  AccountController(IRepository repository, UserManager<IdentityUser> userManager,SignInManager<IdentityUser> signInManager,RoleManager<IdentityRole> roleManager)
         {
             _repository = repository;
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
+
+            adminRole = new IdentityRole()
+            {
+                Name = "Admin"
+            };
+
+             
         }
 
         [HttpGet]
@@ -44,22 +54,35 @@ namespace PetShop.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        public async Task<IActionResult> Register()
+
+        [HttpGet]
+        public  IActionResult Register()
+        {
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Register(Login newUser)
         {
             IdentityUser user = new IdentityUser
             {
-                UserName = "alex",
+                UserName = newUser.UserName,
+
             };
 
-            var result = await _userManager.CreateAsync(user,"123qwe!@#QWE");
+            var result = await _userManager.CreateAsync(user, newUser.Password); /*"123qwe!@#QWE"*/
+            await _roleManager.CreateAsync(adminRole);
+            if (newUser.isAdmin == true)
+                await _userManager.AddToRoleAsync(user, adminRole.Name);
 
 
             if (result.Succeeded)
             {
-                return Content("Created successfully");
+                return RedirectToAction("Index", "Home");
             }
 
-            return Content("Register error");
+            return View();
         }
     }
 }
