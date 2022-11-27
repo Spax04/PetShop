@@ -1,10 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using PetShop.Model;
 using System;
 
 namespace PetShop.Data
 {
-    public class StoreContext : DbContext
+    public class StoreContext : IdentityDbContext<IdentityUser>
     {
         public StoreContext(DbContextOptions<StoreContext> options) : base(options){}
 
@@ -14,7 +16,7 @@ namespace PetShop.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Category>().HasData(
                 new { Id = 1, Name = "Mammal"},
                 new { Id = 2, Name = "Reptile" },

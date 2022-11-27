@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using PetShop.Data;
 using PetShop.Model;
@@ -9,10 +10,12 @@ namespace PetShop.Repositories
     public class PetRepository : IRepository
     {
         private StoreContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public PetRepository(StoreContext context)
+        public PetRepository(StoreContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public IEnumerable<Animal> GetAllAnimals() => _context.Animals!;
@@ -77,6 +80,18 @@ namespace PetShop.Repositories
         public Category GetCategoryByAnimal(Animal animal)
         {
             return _context.Categories!.First(c => c.Id == animal.CategoryId);
+        }
+
+        public async void AddNewUser(Login newUser)
+        {
+            IdentityUser user = new IdentityUser()
+            {
+                UserName = newUser.UserName,
+            };
+
+            var result = await _userManager.CreateAsync(user, newUser.Password);
+
+            _context.SaveChanges();
         }
     }
 }

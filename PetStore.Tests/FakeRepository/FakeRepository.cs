@@ -42,6 +42,11 @@ namespace PetStore.Tests
             throw new NotImplementedException();
         }
 
+        public void AddNewUser(Login newUser)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Delete(int id)
         {
             throw new NotImplementedException();
