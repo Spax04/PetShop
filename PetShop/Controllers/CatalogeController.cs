@@ -2,17 +2,21 @@
 using Microsoft.AspNetCore.Mvc;
 using PetShop.Model;
 using PetShop.Repositories;
+using System.Text.Encodings.Web;
 
 namespace PetShop.Controllers
 {
     [Authorize]
+    [ValidateAntiForgeryToken]
     public class CatalogeController : Controller
     {
         private IRepository _repository;
+        private UrlEncoder _urlEncoder;
 
-        public CatalogeController(IRepository repository)
+        public CatalogeController(IRepository repository,UrlEncoder encoder)
         {
             _repository = repository;
+            _urlEncoder = encoder;
         }
 
         public IActionResult Index()
@@ -46,7 +50,7 @@ namespace PetShop.Controllers
             if (ModelState.IsValid)
             {
                 _repository.AddComment(new Comments { AnimalId = animalId, Comment = newComment});
-                return Redirect(url: $"/Cataloge/ShowDetail?name={name}");
+                return Redirect(url: $"/Cataloge/ShowDetail?name={_urlEncoder.Encode(name)}"); // Use Encode here
             }
             Animal animal = _repository.GetAnimalByName(name);
             ViewBag.Animal = animal;

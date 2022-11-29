@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 namespace PetShop.Controllers
 {
     [Authorize(Roles ="Admin")]
+    [ValidateAntiForgeryToken]
     public class AdminController : Controller
     {
         private IRepository _repository;

@@ -1,8 +1,10 @@
-﻿using Microsoft.Build.Framework;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Build.Framework;
+using System.Data.Common;
 
 namespace PetShop.Model
 {
-    public class Login
+    public class Login : IdentityUser
     {
         [Required]
         public string? UserName { get; set; }
