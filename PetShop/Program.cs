@@ -8,6 +8,7 @@ builder.Services.AddTransient<IRepository, PetRepository>();
 string connectionString = builder.Configuration["ConnectionString:DefaultConnection"];
 builder.Services.AddDbContext<StoreContext>(options => options.UseLazyLoadingProxies().UseSqlServer(connectionString));
 builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<StoreContext>();
+builder.Services.AddCors();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -22,6 +23,12 @@ using (var scope = app.Services.CreateScope())
 app.UseAuthentication();
 app.UseStaticFiles();
 app.UseRouting();
+
+app.UseCors(builder =>
+{
+    builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+});
+
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
