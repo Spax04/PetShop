@@ -7,8 +7,8 @@ using System.Runtime.InteropServices;
 
 namespace PetShop.Controllers
 {
-    [Authorize(Roles ="Admin")]
-    [ValidateAntiForgeryToken]
+    [Authorize(Roles = "Admin")]
+    // // Cant get in because of this
     public class AdminController : Controller
     {
         private IRepository _repository;
@@ -18,7 +18,7 @@ namespace PetShop.Controllers
             this._repository = repository;
         }
 
-        
+        [AutoValidateAntiforgeryToken]
         public IActionResult Index()
         {
             ViewBag.Categories = _repository.GetCategories();

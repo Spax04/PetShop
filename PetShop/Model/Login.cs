@@ -4,7 +4,7 @@ using System.Data.Common;
 
 namespace PetShop.Model
 {
-    public class Login : IdentityUser
+    public class Login 
     {
         [Required]
         public string? UserName { get; set; }
