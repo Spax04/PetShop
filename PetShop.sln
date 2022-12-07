@@ -7,7 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetShop", "PetShop\PetShop.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetStore.Tests", "PetStore.Tests\PetStore.Tests.csproj", "{773A16E6-845F-4DE3-A7B1-3EA1BB099C5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetAPI", "PetAPI\PetAPI.csproj", "{23D1394D-93E3-4035-A8DE-017D01F81E3D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetAPI", "PetAPI\PetAPI.csproj", "{23D1394D-93E3-4035-A8DE-017D01F81E3D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{37672744-FF34-48E5-B1F2-73FC21D1123B} = {37672744-FF34-48E5-B1F2-73FC21D1123B}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
