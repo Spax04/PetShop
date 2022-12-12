@@ -12,9 +12,10 @@ namespace PetShop.Repositories
         Task<IEnumerable<Animal>> GetTopAsync();
         Task<IEnumerable<Animal>> GetAllAnimalsAsync();
 
-        IEnumerable<Category> GetCategories();
-        IEnumerable<Comments> GetCommentsByAnimal(Animal t);
-        IEnumerable<Animal> GetAnimalsByCategoryId(int id);
+
+        Task<IEnumerable<Category>> GetCategoriesAsync();
+        Task<IEnumerable<Comments>> GetCommentsByAnimalAsync(Animal t);
+        Task<IEnumerable<Animal>> GetAnimalsByCategoryIdAsync(int id);
 
         Animal GetAnimalByName(string name);
         void AddComment(Comments newComment);

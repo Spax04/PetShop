@@ -21,7 +21,7 @@ namespace PetShop.Controllers
 
         public async Task<IActionResult> Index()
         {   
-            ViewBag.Categories = _repository.GetCategories();
+            ViewBag.Categories = await _repository.GetCategoriesAsync();
             return View( await _repository.GetAllAnimalsAsync());
         }
 
@@ -29,33 +29,33 @@ namespace PetShop.Controllers
         {
             if(id == 0)
             {
-                ViewBag.Categories = _repository.GetCategories();
+                ViewBag.Categories = await _repository.GetCategoriesAsync();
                 return View("Index",await _repository.GetAllAnimalsAsync());
             }
-            ViewBag.Categories = _repository.GetCategories();
-            return View("Index", _repository.GetAnimalsByCategoryId(id));
+            ViewBag.Categories = await _repository.GetCategoriesAsync();
+            return View("Index", await _repository.GetAnimalsByCategoryIdAsync(id));
         }
 
-        public IActionResult ShowDetail(string name)
+        public async Task<IActionResult> ShowDetail(string name)
         {
             Animal animal = _repository.GetAnimalByName(name);
             ViewBag.Animal = animal;
             ViewBag.Category = _repository.GetCategoryByAnimal(animal);
-            ViewBag.Comments = _repository.GetCommentsByAnimal(animal);
+            ViewBag.Comments = await _repository.GetCommentsByAnimalAsync(animal);
             return View();
         }
 
-        public IActionResult AddComment( string newComment, int animalId, string name)
+        public async Task<IActionResult> AddComment( string newComment, int animalId, string name)
         {
             if (ModelState.IsValid)
             {
                 _repository.AddComment(new Comments { AnimalId = animalId, Comment = newComment});
-                return Redirect(url: $"/Cataloge/ShowDetail?name={_urlEncoder.Encode(name)}"); // Use Encode here
+                return Redirect(url: $"/Cataloge/ShowDetail?name={_urlEncoder.Encode(name)}"); // Use Encode here for protaction agenst 
             }
             Animal animal = _repository.GetAnimalByName(name);
             ViewBag.Animal = animal;
             ViewBag.Category = _repository.GetCategoryByAnimal(animal);
-            ViewBag.Comments = _repository.GetCommentsByAnimal(animal);
+            ViewBag.Comments = await _repository.GetCommentsByAnimalAsync(animal);
             return View("ShowDetail");
         }
 
