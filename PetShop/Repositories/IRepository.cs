@@ -22,10 +22,5 @@ namespace PetShop.Repositories
         Task AddCommentAsync(Comments newComment);
         Task RemoveCommentAsync(int id);
         Task<Category> GetCategoryByAnimalAsync(Animal animal);
-
-        void AddNewUser(Login newUser);
-        Task AddNewUserAsync(Login newUser);
-
-
     }
 }
