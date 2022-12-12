@@ -19,77 +19,77 @@ namespace PetShop.Controllers
         }
 
         [AutoValidateAntiforgeryToken]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            ViewBag.Categories = _repository.GetCategories();
-            return View(_repository.GetAllAnimals());
+            ViewBag.Categories = await _repository.GetCategoriesAsync();
+            return View(await _repository.GetAllAnimalsAsync());
         }
 
-        public IActionResult Filter(int id)
+        public async Task<IActionResult> Filter(int id)
         {
             if (id == 0)
             {
-                ViewBag.Categories = _repository.GetCategories();
-                return View("Index", _repository.GetAllAnimals());
+                ViewBag.Categories = await _repository.GetCategoriesAsync();
+                return View("Index",await _repository.GetAllAnimalsAsync());
             }
-            ViewBag.Categories = _repository.GetCategories();
-            return View("Index", _repository.GetAnimalsByCategoryId(id));
+            ViewBag.Categories = await _repository.GetCategoriesAsync();
+            return View("Index",await _repository.GetAnimalsByCategoryIdAsync(id));
         }
 
         [HttpGet]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewBag.Categories = _repository.GetCategories();
+            ViewBag.Categories = await _repository.GetCategoriesAsync();
             return View();
         }
 
         [HttpPost]
-        public IActionResult Create(Animal animal)
+        public async Task<IActionResult> Create(Animal animal)
         {
             
             if (ModelState.IsValid)
             {
-                _repository.Insert(animal);
+                await _repository.InsertAsyinc(animal);
                 return RedirectToAction("Index");
             }
-            ViewBag.Categories = _repository.GetCategories();
+            ViewBag.Categories = await _repository.GetCategoriesAsync();
             return View();
         }
 
         [HttpGet]
-        public IActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            ViewBag.Categories = _repository.GetCategories();
-            Animal animal = _repository.GetAnimalById(id);
+            ViewBag.Categories = await _repository.GetCategoriesAsync();
+            Animal animal = await _repository.GetAnimalByIdAsync(id);
             
 
             return View(animal);
         }
 
-        [HttpPost]
-        public IActionResult Edit(int id,Animal animal)
+        [HttpPost] 
+        public async Task<IActionResult> Edit(int id,Animal animal)
         {
             if (ModelState.IsValid)
             {
-                _repository.Update(id,animal);
+                await _repository.UpdateAsync(id,animal);
                 return RedirectToAction("Index");
             }
 
-            ViewBag.Categories = _repository.GetCategories();
+            ViewBag.Categories = await _repository.GetCategoriesAsync();
             return View(animal);
         }
 
-        public IActionResult Delete(string name)
+        public async Task<IActionResult> Delete(string name)
         {
-            Animal animal = _repository.GetAnimalByName(name);
-            IEnumerable<Comments> aComments = _repository.GetCommentsByAnimal(animal);
+            Animal animal = await _repository.GetAnimalByNameAsync(name);
+            IEnumerable<Comments> aComments = await _repository.GetCommentsByAnimalAsync(animal);
 
             foreach (Comments comment in aComments)
             {
-                _repository.RemoveComment(comment.Id);
+                await _repository.RemoveCommentAsync(comment.Id);
             }
 
-            _repository.Delete(animal.Id);
+            await _repository.DeleteAsync(animal.Id);
             return RedirectToAction("Index");
         }
     }

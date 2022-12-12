@@ -5,25 +5,22 @@ namespace PetShop.Repositories
 {
     public interface IRepository
     {
-        void Insert(Animal a);
-        void Update(int id, Animal a);
-        void Delete(int id);
+        Task InsertAsyinc(Animal a);
+        Task UpdateAsync(int id, Animal a);
+        Task DeleteAsync(int id);
 
-        IEnumerable<Animal> GetTop();
-        IEnumerable<Animal> GetAllAnimals();
-        IEnumerable<Category> GetCategories();
-        IEnumerable<Comments> GetCommentsByAnimal(Animal t);
-        IEnumerable<Animal> GetAnimalsByCategoryId(int id);
-
-        Animal GetAnimalByName(string name);
-        void AddComment(Comments newComment);
-        void RemoveComment(int id);
-        Animal GetAnimalById(int id);
-
-        Category GetCategoryByAnimal(Animal animal);
-
-         void AddNewUser(Login newUser);
+        Task<IEnumerable<Animal>> GetTopAsync();
+        Task<IEnumerable<Animal>> GetAllAnimalsAsync();
 
 
+        Task<IEnumerable<Category>> GetCategoriesAsync();
+        Task<IEnumerable<Comments>> GetCommentsByAnimalAsync(Animal t);
+        Task<IEnumerable<Animal>> GetAnimalsByCategoryIdAsync(int id);
+
+        Task<Animal> GetAnimalByNameAsync(string name);
+        Task<Animal> GetAnimalByIdAsync(int id);
+        Task AddCommentAsync(Comments newComment);
+        Task RemoveCommentAsync(int id);
+        Task<Category> GetCategoryByAnimalAsync(Animal animal);
     }
 }

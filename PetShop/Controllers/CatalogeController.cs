@@ -7,7 +7,7 @@ using System.Text.Encodings.Web;
 namespace PetShop.Controllers
 {
     [Authorize]
-    [ValidateAntiForgeryToken]
+    [AutoValidateAntiforgeryToken]
     public class CatalogeController : Controller
     {
         private IRepository _repository;
@@ -19,49 +19,49 @@ namespace PetShop.Controllers
             _urlEncoder = encoder;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {   
-            ViewBag.Categories = _repository.GetCategories();
-            return View(_repository.GetAllAnimals());
+            ViewBag.Categories = await _repository.GetCategoriesAsync();
+            return View( await _repository.GetAllAnimalsAsync());
         }
 
-        public IActionResult Filter(int id)
+        public async Task<IActionResult> Filter(int id)
         {
             if(id == 0)
             {
-                ViewBag.Categories = _repository.GetCategories();
-                return View("Index", _repository.GetAllAnimals());
+                ViewBag.Categories = await _repository.GetCategoriesAsync();
+                return View("Index",await _repository.GetAllAnimalsAsync());
             }
-            ViewBag.Categories = _repository.GetCategories();
-            return View("Index", _repository.GetAnimalsByCategoryId(id));
+            ViewBag.Categories = await _repository.GetCategoriesAsync();
+            return View("Index", await _repository.GetAnimalsByCategoryIdAsync(id));
         }
 
-        public IActionResult ShowDetail(string name)
+        public async Task<IActionResult> ShowDetail(string name)
         {
-            Animal animal = _repository.GetAnimalByName(name);
+            Animal animal = await _repository.GetAnimalByNameAsync(name);
             ViewBag.Animal = animal;
-            ViewBag.Category = _repository.GetCategoryByAnimal(animal);
-            ViewBag.Comments = _repository.GetCommentsByAnimal(animal);
+            ViewBag.Category = await _repository.GetCategoryByAnimalAsync(animal);
+            ViewBag.Comments = await _repository.GetCommentsByAnimalAsync(animal);
             return View();
         }
 
-        public IActionResult AddComment( string newComment, int animalId, string name)
+        public async Task<IActionResult> AddComment( string newComment, int animalId, string name)
         {
             if (ModelState.IsValid)
             {
-                _repository.AddComment(new Comments { AnimalId = animalId, Comment = newComment});
-                return Redirect(url: $"/Cataloge/ShowDetail?name={_urlEncoder.Encode(name)}"); // Use Encode here
+                await _repository.AddCommentAsync(new Comments { AnimalId = animalId, Comment = newComment});
+                return Redirect(url: $"/Cataloge/ShowDetail?name={_urlEncoder.Encode(name)}"); // Use Encode here for protaction agenst 
             }
-            Animal animal = _repository.GetAnimalByName(name);
+            Animal animal = await _repository.GetAnimalByNameAsync(name);
             ViewBag.Animal = animal;
-            ViewBag.Category = _repository.GetCategoryByAnimal(animal);
-            ViewBag.Comments = _repository.GetCommentsByAnimal(animal);
+            ViewBag.Category = await _repository.GetCategoryByAnimalAsync(animal);
+            ViewBag.Comments = await _repository.GetCommentsByAnimalAsync(animal);
             return View("ShowDetail");
         }
 
-        public IActionResult RemoveComment(int id)
+        public async Task<IActionResult> RemoveComment(int id)
         {
-            _repository.RemoveComment(id);
+            await _repository.RemoveCommentAsync(id);
             return RedirectToAction("Index");
         }
     }

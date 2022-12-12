@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Server.IIS.Core;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
+
 using PetShop.Data;
 using PetShop.Model;
 using System.Collections.Generic;
@@ -18,40 +19,62 @@ namespace PetShop.Repositories
             _userManager = userManager;
         }
 
-        public IEnumerable<Animal> GetAllAnimals() => _context.Animals!;
-        public IEnumerable<Category> GetCategories() => _context.Categories!;
-        public IEnumerable<Comments> GetComments() => _context.Comments!;
-        public Animal GetAnimalByName(string name) => _context.Animals!.First(a => a.Name == name);
-        public Animal GetAnimalById(int id) => _context.Animals!.First(a => a.Id == id);
-        public IEnumerable<Comments> GetCommentsByAnimal(Animal animal) => _context.Comments.Where(t => t.AnimalId == animal.Id).ToList();
-        public IEnumerable<Animal> GetTop()
-        {
-            return _context.Animals!.Include(c => c.Comments).OrderByDescending(c => c.Comments!.Count()).Take(2).ToList();
-            
-        }
 
-        public void RemoveComment(int id)
+        private IEnumerable<Animal> GetAllAnimals() => _context.Animals!;
+        public Task<IEnumerable<Animal>> GetAllAnimalsAsync() => Task.Run(() => GetAllAnimals());
+
+
+        private IEnumerable<Category> GetCategories() => _context.Categories!;
+        public Task<IEnumerable<Category>> GetCategoriesAsync() => Task.Run(()=>GetCategories());
+
+
+        public Animal GetAnimalByName(string name) => _context.Animals!.First(a => a.Name == name);
+        public Task<Animal> GetAnimalByNameAsync(string name) => Task.Run(()=>GetAnimalByName(name));
+
+
+        private IEnumerable<Animal> GetAnimalsByCategoryId(int id) => _context.Animals!.Where(c => c.CategoryId == id);
+        public Task<IEnumerable<Animal>> GetAnimalsByCategoryIdAsync(int id) => Task.Run(() => GetAnimalsByCategoryId(id));
+
+
+        private Animal GetAnimalById(int id) => _context.Animals!.First(a => a.Id == id);
+        public Task<Animal> GetAnimalByIdAsync(int id) => Task.Run(() => GetAnimalById(id));
+
+
+        private IEnumerable<Comments> GetCommentsByAnimal(Animal animal) => _context.Comments.Where(t => t.AnimalId == animal.Id).ToList();
+        public Task<IEnumerable<Comments>> GetCommentsByAnimalAsync(Animal t) => Task.Run(()=>GetCommentsByAnimal(t));
+
+
+        private IEnumerable<Animal> GetTop() => _context.Animals!.Include(c => c.Comments).OrderByDescending(c => c.Comments!.Count()).Take(2).ToList(); 
+        public async Task<IEnumerable<Animal>> GetTopAsync() =>  await Task.Run(() => GetTop());
+
+
+        private void AddComment(Comments newComment)
+        {
+            _context.Comments.Add(newComment);
+            _context.SaveChanges();
+        }
+        public Task AddCommentAsync(Comments newComment) => Task.Run(() => AddComment(newComment));
+
+
+        private void RemoveComment(int id)
         {
             Comments removableComment = _context.Comments!.First(c => c.Id == id);
 
             _context.Comments!.Remove(removableComment);
             _context.SaveChanges();
         }
-
-        public void AddComment(Comments newComment)
-        {
-            _context.Comments.Add(newComment);
-            _context.SaveChanges();
-        }
+        public Task RemoveCommentAsync(int id) => Task.Run(() => RemoveComment(id));
 
 
-        public void Insert(Animal animal)
+        private void Insert(Animal animal)
         {
             _context.Animals.Add(animal);
             _context.SaveChanges();
         }
+        public Task InsertAsyinc(Animal a) =>  Task.Run(() => Insert(a));
 
-        public void Update(int id, Animal animal)
+
+        private void Update(int id, Animal animal)
         {
             var animalInDb = _context.Animals!.Single(a => a.Id == id);
 
@@ -61,37 +84,21 @@ namespace PetShop.Repositories
             animalInDb.Discription = animal.Discription;
             animalInDb.CategoryId = animal.CategoryId;
             
-
             _context.SaveChanges();
         }
+        public Task UpdateAsync(int id, Animal animal) => Task.Run(()=> Update(id,animal));
 
-        public void Delete(int id)
+
+        private void Delete(int id)
         {
             var animal = _context.Animals!.Single( a => a.Id == id);
             _context.Animals.Remove(animal);
             _context.SaveChanges();
         }
+        public Task DeleteAsync(int id) => Task.Run(()=> Delete(id));
 
-        public IEnumerable<Animal> GetAnimalsByCategoryId(int id)
-        {
-            return _context.Animals!.Where(c => c.CategoryId == id);
-        }
 
-        public Category GetCategoryByAnimal(Animal animal)
-        {
-            return _context.Categories!.First(c => c.Id == animal.CategoryId);
-        }
-
-        public async void AddNewUser(Login newUser)
-        {
-            IdentityUser user = new IdentityUser()
-            {
-                UserName = newUser.UserName,
-            };
-
-            var result = await _userManager.CreateAsync(user, newUser.Password);
-
-            _context.SaveChanges();
-        }
+        public Category GetCategoryByAnimal(Animal animal) => _context.Categories!.First(c => c.Id == animal.CategoryId);
+        public Task<Category> GetCategoryByAnimalAsync(Animal animal) => Task.Run(()=> GetCategoryByAnimal(animal));
     }
 }
