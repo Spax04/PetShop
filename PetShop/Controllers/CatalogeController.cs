@@ -38,9 +38,9 @@ namespace PetShop.Controllers
 
         public async Task<IActionResult> ShowDetail(string name)
         {
-            Animal animal = _repository.GetAnimalByName(name);
+            Animal animal = await _repository.GetAnimalByNameAsync(name);
             ViewBag.Animal = animal;
-            ViewBag.Category = _repository.GetCategoryByAnimal(animal);
+            ViewBag.Category = await _repository.GetCategoryByAnimalAsync(animal);
             ViewBag.Comments = await _repository.GetCommentsByAnimalAsync(animal);
             return View();
         }
@@ -49,19 +49,19 @@ namespace PetShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                _repository.AddComment(new Comments { AnimalId = animalId, Comment = newComment});
+                await _repository.AddCommentAsync(new Comments { AnimalId = animalId, Comment = newComment});
                 return Redirect(url: $"/Cataloge/ShowDetail?name={_urlEncoder.Encode(name)}"); // Use Encode here for protaction agenst 
             }
-            Animal animal = _repository.GetAnimalByName(name);
+            Animal animal = await _repository.GetAnimalByNameAsync(name);
             ViewBag.Animal = animal;
-            ViewBag.Category = _repository.GetCategoryByAnimal(animal);
+            ViewBag.Category = await _repository.GetCategoryByAnimalAsync(animal);
             ViewBag.Comments = await _repository.GetCommentsByAnimalAsync(animal);
             return View("ShowDetail");
         }
 
-        public IActionResult RemoveComment(int id)
+        public async Task<IActionResult> RemoveComment(int id)
         {
-            _repository.RemoveComment(id);
+            await _repository.RemoveCommentAsync(id);
             return RedirectToAction("Index");
         }
     }

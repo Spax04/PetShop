@@ -60,7 +60,7 @@ namespace PetShop.Controllers
         public async Task<IActionResult> Edit(int id)
         {
             ViewBag.Categories = await _repository.GetCategoriesAsync();
-            Animal animal = _repository.GetAnimalById(id);
+            Animal animal = await _repository.GetAnimalByIdAsync(id);
             
 
             return View(animal);
@@ -81,12 +81,12 @@ namespace PetShop.Controllers
 
         public async Task<IActionResult> Delete(string name)
         {
-            Animal animal = _repository.GetAnimalByName(name);
+            Animal animal = await _repository.GetAnimalByNameAsync(name);
             IEnumerable<Comments> aComments = await _repository.GetCommentsByAnimalAsync(animal);
 
             foreach (Comments comment in aComments)
             {
-                _repository.RemoveComment(comment.Id);
+                await _repository.RemoveCommentAsync(comment.Id);
             }
 
             await _repository.DeleteAsync(animal.Id);

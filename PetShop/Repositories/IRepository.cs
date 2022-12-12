@@ -17,14 +17,14 @@ namespace PetShop.Repositories
         Task<IEnumerable<Comments>> GetCommentsByAnimalAsync(Animal t);
         Task<IEnumerable<Animal>> GetAnimalsByCategoryIdAsync(int id);
 
-        Animal GetAnimalByName(string name);
-        void AddComment(Comments newComment);
-        void RemoveComment(int id);
-        Animal GetAnimalById(int id);
+        Task<Animal> GetAnimalByNameAsync(string name);
+        Task<Animal> GetAnimalByIdAsync(int id);
+        Task AddCommentAsync(Comments newComment);
+        Task RemoveCommentAsync(int id);
+        Task<Category> GetCategoryByAnimalAsync(Animal animal);
 
-        Category GetCategoryByAnimal(Animal animal);
-
-         void AddNewUser(Login newUser);
+        void AddNewUser(Login newUser);
+        Task AddNewUserAsync(Login newUser);
 
 
     }
