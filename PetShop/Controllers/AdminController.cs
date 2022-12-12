@@ -19,18 +19,18 @@ namespace PetShop.Controllers
         }
 
         [AutoValidateAntiforgeryToken]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             ViewBag.Categories = _repository.GetCategories();
-            return View(_repository.GetAllAnimals());
+            return View(await _repository.GetAllAnimalsAsync());
         }
 
-        public IActionResult Filter(int id)
+        public async Task<IActionResult> Filter(int id)
         {
             if (id == 0)
             {
                 ViewBag.Categories = _repository.GetCategories();
-                return View("Index", _repository.GetAllAnimals());
+                return View("Index",await _repository.GetAllAnimalsAsync());
             }
             ViewBag.Categories = _repository.GetCategories();
             return View("Index", _repository.GetAnimalsByCategoryId(id));
@@ -44,12 +44,12 @@ namespace PetShop.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(Animal animal)
+        public async Task<IActionResult> Create(Animal animal)
         {
             
             if (ModelState.IsValid)
             {
-                _repository.Insert(animal);
+                await _repository.InsertAsyinc(animal);
                 return RedirectToAction("Index");
             }
             ViewBag.Categories = _repository.GetCategories();
@@ -66,12 +66,12 @@ namespace PetShop.Controllers
             return View(animal);
         }
 
-        [HttpPost]
-        public IActionResult Edit(int id,Animal animal)
+        [HttpPost] 
+        public async Task<IActionResult> Edit(int id,Animal animal)
         {
             if (ModelState.IsValid)
             {
-                _repository.Update(id,animal);
+                await _repository.UpdateAsync(id,animal);
                 return RedirectToAction("Index");
             }
 
@@ -79,7 +79,7 @@ namespace PetShop.Controllers
             return View(animal);
         }
 
-        public IActionResult Delete(string name)
+        public async Task<IActionResult> Delete(string name)
         {
             Animal animal = _repository.GetAnimalByName(name);
             IEnumerable<Comments> aComments = _repository.GetCommentsByAnimal(animal);
@@ -89,7 +89,7 @@ namespace PetShop.Controllers
                 _repository.RemoveComment(comment.Id);
             }
 
-            _repository.Delete(animal.Id);
+            await _repository.DeleteAsync(animal.Id);
             return RedirectToAction("Index");
         }
     }

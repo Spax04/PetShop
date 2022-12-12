@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Server.IIS.Core;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Identity.Client;
+
 using PetShop.Data;
 using PetShop.Model;
 using System.Collections.Generic;
@@ -19,16 +20,17 @@ namespace PetShop.Repositories
         }
 
         public IEnumerable<Animal> GetAllAnimals() => _context.Animals!;
+        public Task<IEnumerable<Animal>> GetAllAnimalsAsync() => Task.Run(() => GetAllAnimals());
+
         public IEnumerable<Category> GetCategories() => _context.Categories!;
         public IEnumerable<Comments> GetComments() => _context.Comments!;
         public Animal GetAnimalByName(string name) => _context.Animals!.First(a => a.Name == name);
+
         public Animal GetAnimalById(int id) => _context.Animals!.First(a => a.Id == id);
         public IEnumerable<Comments> GetCommentsByAnimal(Animal animal) => _context.Comments.Where(t => t.AnimalId == animal.Id).ToList();
-        public IEnumerable<Animal> GetTop()
-        {
-            return _context.Animals!.Include(c => c.Comments).OrderByDescending(c => c.Comments!.Count()).Take(2).ToList();
-            
-        }
+
+        public IEnumerable<Animal> GetTop() => _context.Animals!.Include(c => c.Comments).OrderByDescending(c => c.Comments!.Count()).Take(2).ToList(); 
+        public async Task<IEnumerable<Animal>> GetTopAsync() =>  await Task.Run(() => GetTop());
 
         public void RemoveComment(int id)
         {
@@ -50,6 +52,8 @@ namespace PetShop.Repositories
             _context.Animals.Add(animal);
             _context.SaveChanges();
         }
+        public Task InsertAsyinc(Animal a) =>  Task.Run(() => Insert(a));
+
 
         public void Update(int id, Animal animal)
         {
@@ -61,9 +65,10 @@ namespace PetShop.Repositories
             animalInDb.Discription = animal.Discription;
             animalInDb.CategoryId = animal.CategoryId;
             
-
             _context.SaveChanges();
         }
+
+        public Task UpdateAsync(int id, Animal animal) => Task.Run(()=> Update(id,animal));
 
         public void Delete(int id)
         {
@@ -71,6 +76,9 @@ namespace PetShop.Repositories
             _context.Animals.Remove(animal);
             _context.SaveChanges();
         }
+
+        public Task DeleteAsync(int id) => Task.Run(()=> Delete(id));
+
 
         public IEnumerable<Animal> GetAnimalsByCategoryId(int id)
         {

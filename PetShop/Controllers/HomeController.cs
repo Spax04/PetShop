@@ -16,9 +16,9 @@ namespace PetShop.Controllers
         }
 
         [AllowAnonymous]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            ViewBag.TopAnimnals = _repository.GetTop();
+            ViewBag.TopAnimnals = await _repository.GetTopAsync();
             return View();
         }
     }

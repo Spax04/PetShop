@@ -7,7 +7,7 @@ using System.Text.Encodings.Web;
 namespace PetShop.Controllers
 {
     [Authorize]
-    [ValidateAntiForgeryToken]
+    [AutoValidateAntiforgeryToken]
     public class CatalogeController : Controller
     {
         private IRepository _repository;
@@ -19,18 +19,18 @@ namespace PetShop.Controllers
             _urlEncoder = encoder;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {   
             ViewBag.Categories = _repository.GetCategories();
-            return View(_repository.GetAllAnimals());
+            return View( await _repository.GetAllAnimalsAsync());
         }
 
-        public IActionResult Filter(int id)
+        public async Task<IActionResult> Filter(int id)
         {
             if(id == 0)
             {
                 ViewBag.Categories = _repository.GetCategories();
-                return View("Index", _repository.GetAllAnimals());
+                return View("Index",await _repository.GetAllAnimalsAsync());
             }
             ViewBag.Categories = _repository.GetCategories();
             return View("Index", _repository.GetAnimalsByCategoryId(id));
